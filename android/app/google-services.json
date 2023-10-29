@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "972297666969",
+    "project_id": "allergyawayauth-94d00",
+    "storage_bucket": "allergyawayauth-94d00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972297666969:android:4a5057750c52ce05015308",
+        "android_client_info": {
+          "package_name": "com.example.demo_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf5XoKqBlUv1ysiX2WB_v55USHudahn4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
