@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:demo_2/pages/allergy_input_page.dart';
-import 'package:demo_2/pages/scanner_page.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -58,18 +56,18 @@ class HomePage extends StatelessWidget {
                   children: [
 
                     Text(
-                      "Hey, " + user.displayName! + "!",
+                      "Welcome, " + user.displayName! + "!",
                       style: GoogleFonts.bebasNeue(color: Colors.white, fontSize: 46, fontWeight: FontWeight.bold)),
                     const SizedBox(
                       height: 25
                     ),
-                    Text("What would you like to do?",style: GoogleFonts.bebasNeue(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text("Click the button to add your allergies!",style: GoogleFonts.bebasNeue(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
 
                     const SizedBox(
                       height: 30,
                     ),
 
-                    ElevatedButton(child: Text("Scan a Barcode"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ScannerPage(),));},),
+                    
                     ElevatedButton(child: Text("Input allergies"), onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => AllergyInputPage()));}),
 
                     

@@ -7,7 +7,10 @@ import 'package:flutter/services.dart';
 // ignore: must_be_immutable
 class FoodInfoPage extends StatefulWidget {
   var scanResult;
-  FoodInfoPage({Key? mykey, this.scanResult}) : super(key: mykey);
+  var allergy1;
+  var allergy2;
+  var allergy3;
+  FoodInfoPage({Key? mykey, this.scanResult, this.allergy1, this.allergy2, this.allergy3 }) : super(key: mykey);
     
 
   @override
@@ -17,8 +20,10 @@ class FoodInfoPage extends StatefulWidget {
 
 class _FoodInfoPageState extends State<FoodInfoPage> {
   
+  
   String name = '';
   String image = '';
+  String allergyuno = '';
 
   Future getFoods(scanResult) async {
     var response = await http.get(Uri.https('world.openfoodfacts.net', '/api/v2/product/0670171121226'));
@@ -27,12 +32,19 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
     name = product_name_en;
     String image_url = jsonData['product']['image_url'];
     image = image_url;
-
+    if (jsonData['products']['ingredients_text_en'].contains(widget.allergy1)) {
+      allergyuno = widget.allergy1;
+    }
   }
+
+  
+
+  
  
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         elevation: 15,
@@ -76,25 +88,23 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
 
                                 const SizedBox(height: 25),
 
-                                Text(name, style: GoogleFonts.bebasNeue(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),)
+                                Text(name, style: GoogleFonts.bebasNeue(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),),
+                                Text(allergyuno, style: GoogleFonts.bebasNeue(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),)
                               ],
                             ),
                           );
-                          
                         } else {
                           return const CircularProgressIndicator();
-                        }
-                        
-                      }
-                      ),
-                    
+                        }      
+                      },
+                      
+                    ),
                     
                   ],
                 ),
               ),
-
             )
-        ),
+          ),
         ),
       );
   }
