@@ -23,19 +23,39 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
   
   String name = '';
   String image = '';
-  String allergyuno = '';
+  String allergy1 = '';
+  String allergy2 = '';
+  String allergy3 = '';
+  List containedList = [];
+  String items = '';
 
   Future getFoods(scanResult) async {
-    var response = await http.get(Uri.https('world.openfoodfacts.net', '/api/v2/product/0670171121226'));
+    var response = await http.get(Uri.https('world.openfoodfacts.net', '/api/v2/product/$scanResult'));
     var jsonData = jsonDecode(response.body);
     String product_name_en = jsonData['product']['product_name_en'];
     name = product_name_en;
     String image_url = jsonData['product']['image_url'];
     image = image_url;
-    if (jsonData['products']['ingredients_text_en'].contains(widget.allergy1)) {
-      allergyuno = widget.allergy1;
+    String ingredients_text_en = jsonData['product']['ingredients_text_en'];
+    String ingredients = ingredients_text_en;
+    if (ingredients.contains(widget.allergy1)) {
+      allergy1 = widget.allergy1;
+      containedList.add(allergy1);
     }
+    if (ingredients.contains(widget.allergy2)) {
+      allergy2 = widget.allergy2;
+      containedList.add(allergy2);
+    }
+    if (ingredients.contains(widget.allergy3)) {
+      allergy1 = widget.allergy3;
+      containedList.add(allergy3);
+      print(containedList);
+    }
+    items = containedList.join(', ');
+
   }
+
+
 
   
 
@@ -88,8 +108,13 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
 
                                 const SizedBox(height: 25),
 
-                                Text(name, style: GoogleFonts.bebasNeue(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),),
-                                Text(allergyuno, style: GoogleFonts.bebasNeue(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),)
+                                Text(name, style: GoogleFonts.bebasNeue(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.white),),
+                                const SizedBox(height: 180),
+                                Text('$items' + " are in this item!", style: GoogleFonts.bebasNeue(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),),
+                                
+                                
+                                
+
                               ],
                             ),
                           );
